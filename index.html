@@ -5,81 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jose Montalvo | Just a guy wanting to help.</title>
     <style>
-    /* OPTION 3: CREATIVE SPARK */
+   /* OPTION 4: NEON CYBERPUNK */
     body { 
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        line-height: 1.6; 
-        color: #444; 
-        background-color: #f0f2f5; /* Soft Cloud Grey */
+        font-family: 'Segoe UI', sans-serif; 
+        color: #e0e0e0; 
+        background-color: #1a1a2e; /* Deep Navy/Black Background */
         max-width: 800px; 
         margin: 0 auto; 
         padding: 20px; 
     }
 
-    /* THE HEADER GRADIENT */
+    /* GRADIENT TEXT HEADER */
     header { 
         text-align: center; 
-        padding: 60px 20px; 
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Deep Violet to Blue */
-        color: white;
-        border-radius: 15px; /* Soft rounded corners */
-        box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4); /* Glow effect */
-        margin-bottom: 40px;
+        padding: 60px 0; 
+        border-bottom: 2px solid #0f3460;
     }
     
-    header h1 { margin: 0; color: #ffffff; font-size: 2.5em; letter-spacing: 1px; }
-    header .tagline { color: #e0e0e0; margin-top: 10px; font-weight: 300; }
-    
-    /* SECTIONS */
-    section { margin: 40px 0; }
-    h2 { 
-        color: #764ba2; /* Matches the header purple */
-        border-bottom: 2px solid #764ba2; /* Underline instead of side-bar */
-        display: inline-block;
-        padding-bottom: 5px;
+    h1 { 
+        margin: 0; 
+        font-size: 3em; 
+        background: -webkit-linear-gradient(45deg, #e94560, #fcd34d); /* Red to Yellow Gradient */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; /* Makes the text itself the gradient */
     }
     
-    /* CARDS WITH HOVER LIFT */
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    
+    .tagline { color: #a5a5a5; font-style: italic; }
+
+    /* NEON CARDS */
     .card { 
-        border: none; 
+        background: #16213e; /* Slightly lighter navy */
+        border: 1px solid #0f3460;
         padding: 20px; 
-        border-radius: 12px; 
-        background: #ffffff; 
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(233, 69, 96, 0.1); /* Subtle Red Glow */
+        transition: 0.3s;
     }
     
-    /* The Animation */
-    .card:hover { 
-        transform: translateY(-5px); /* Moves up */
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Shadow grows */
+    .card:hover {
+        border-color: #e94560; /* Border turns neon red on hover */
+        box-shadow: 0 0 20px rgba(233, 69, 96, 0.4); /* Glow gets stronger */
+        transform: translateY(-5px);
     }
     
-    .card h3 { margin-top: 0; color: #444; }
-    
-    /* VIBRANT BUTTONS */
+    h2 { color: #fcd34d; border-left: 4px solid #e94560; padding-left: 15px; }
+    h3 { color: #fff; }
+    p { color: #b0b0b0; }
+
+    /* GLOWING BUTTONS */
     .btn { 
         display: inline-block; 
-        padding: 12px 25px; 
-        background: linear-gradient(to right, #ff7e5f, #feb47b); /* Sunset Orange Gradient */
-        color: white; 
+        padding: 10px 25px; 
+        background: transparent;
+        color: #e94560; /* Neon Red Text */
+        border: 2px solid #e94560;
+        border-radius: 5px; 
         text-decoration: none; 
-        border-radius: 25px; /* Pill shape */
-        margin-top: 15px; 
-        margin-right: 10px;
         font-weight: bold;
-        box-shadow: 0 4px 10px rgba(255, 126, 95, 0.4);
-        transition: transform 0.2s;
+        transition: 0.3s;
     }
+    
     .btn:hover { 
-        transform: scale(1.05); /* Grows slightly when clicked */
-        background: linear-gradient(to right, #feb47b, #ff7e5f); /* Swaps gradient direction */
+        background: #e94560; 
+        color: white;
+        box-shadow: 0 0 15px #e94560; /* Neon Glow Effect */
     }
-
-    footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #888; }
-    </style>
+    
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }    </style>
 </head>
 <body>
 
