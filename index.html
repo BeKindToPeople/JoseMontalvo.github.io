@@ -9,7 +9,9 @@
     body { 
         font-family: 'Segoe UI', sans-serif; 
         color: #e0e0e0; 
-        background-color: #1a1a2e; /* Deep Navy/Black Background */
+        /* The Fix: A deep blue-to-grey gradient makes it feel "atmospheric" */
+        background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+        min-height: 100vh; /* Forces the gradient to fill the whole screen */
         max-width: 800px; 
         margin: 0 auto; 
         padding: 20px; 
