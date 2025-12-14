@@ -5,23 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jose Montalvo | Just a guy wanting to help.</title>
     <style>
-        /* Simple, Clean Engineering Style */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; padding: 40px 0; border-bottom: 2px solid #0056b3; }
-        h1 { margin: 0; color: #004085; }
-        .tagline { font-style: italic; color: #666; margin-top: 10px; }
-        
-        section { margin: 40px 0; }
-        h2 { color: #0056b3; border-left: 5px solid #0056b3; padding-left: 10px; }
-        
-        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .card { border: 1px solid #ddd; padding: 15px; border-radius: 5px; background: #f9f9f9; }
-        .card h3 { margin-top: 0; }
-        
-        .btn { display: inline-block; padding: 10px 20px; background: #0056b3; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
-        .btn:hover { background: #004494; }
+    /* OPTION 3: CREATIVE SPARK */
+    body { 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        line-height: 1.6; 
+        color: #444; 
+        background-color: #f0f2f5; /* Soft Cloud Grey */
+        max-width: 800px; 
+        margin: 0 auto; 
+        padding: 20px; 
+    }
 
-        footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #777; }
+    /* THE HEADER GRADIENT */
+    header { 
+        text-align: center; 
+        padding: 60px 20px; 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Deep Violet to Blue */
+        color: white;
+        border-radius: 15px; /* Soft rounded corners */
+        box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4); /* Glow effect */
+        margin-bottom: 40px;
+    }
+    
+    header h1 { margin: 0; color: #ffffff; font-size: 2.5em; letter-spacing: 1px; }
+    header .tagline { color: #e0e0e0; margin-top: 10px; font-weight: 300; }
+    
+    /* SECTIONS */
+    section { margin: 40px 0; }
+    h2 { 
+        color: #764ba2; /* Matches the header purple */
+        border-bottom: 2px solid #764ba2; /* Underline instead of side-bar */
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+    
+    /* CARDS WITH HOVER LIFT */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    
+    .card { 
+        border: none; 
+        padding: 20px; 
+        border-radius: 12px; 
+        background: #ffffff; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+    }
+    
+    /* The Animation */
+    .card:hover { 
+        transform: translateY(-5px); /* Moves up */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* Shadow grows */
+    }
+    
+    .card h3 { margin-top: 0; color: #444; }
+    
+    /* VIBRANT BUTTONS */
+    .btn { 
+        display: inline-block; 
+        padding: 12px 25px; 
+        background: linear-gradient(to right, #ff7e5f, #feb47b); /* Sunset Orange Gradient */
+        color: white; 
+        text-decoration: none; 
+        border-radius: 25px; /* Pill shape */
+        margin-top: 15px; 
+        margin-right: 10px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 126, 95, 0.4);
+        transition: transform 0.2s;
+    }
+    .btn:hover { 
+        transform: scale(1.05); /* Grows slightly when clicked */
+        background: linear-gradient(to right, #feb47b, #ff7e5f); /* Swaps gradient direction */
+    }
+
+    footer { text-align: center; margin-top: 50px; font-size: 0.8em; color: #888; }
     </style>
 </head>
 <body>
