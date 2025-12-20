@@ -11,27 +11,29 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
   <style>
-    /*-----------------------------------*\
-      #MEXICAN DESERT THEME VARIABLES
+   /*-----------------------------------*\
+      #WARM DESERT ACADEMY THEME
     \*-----------------------------------*/
     :root {
-      /* BACKGROUNDS */
-      --background-color: #FFEDDF;      /* Cream (Oaxacan Sand) */
-      --card-background: #FFFFFF;       /* Pure White */
-      --sidebar-background: #FFFFFF;    
+      /* BACKGROUNDS (The biggest change) */
+      --background-color: #E6DECF;      /* Warm Sandstone (Instead of Grey) */
+      --card-background: #FFFAF0;       /* Floral Cream (Instead of cold white) */
+      
+      /* SIDEBAR (Kept the same) */
+      --sidebar-background: #143632;    /* Deep Evergreen */
+      --sidebar-text: #FFFFFF;          /* White text */
       
       /* TEXT COLORS */
-      --text-main: #3E2723;             /* Espresso (Dark Brown) */
-      --text-light: #5D4037;            /* Lighter Brown */
-      --text-highlight: #BF360C;        /* Terracotta (Burnt Orange) */
+      --text-main: #2C241B;             /* Dark Espresso (Warmer than black) */
+      --text-light: #5D4037;            /* Leather Brown */
+      --text-highlight: #8B2E39;        /* Deep Burgundy */
 
       /* ACCENTS */
-      --accent-color: #00897B;          /* Blue Agave (Teal) */
-      --border-color: #D7CCC8;          /* Light Tan Border */
+      --accent-color: #D99E53;          /* Bright Sunset Gold */
+      --border-color: #D4C5B0;          /* Sand Border */
       
-      /* GRADIENTS & SHADOWS */
-      --shadow-1: 0 10px 30px rgba(62, 39, 35, 0.1);
-      --gradient-header: linear-gradient(135deg, #BF360C 0%, #D84315 100%);
+      /* SHADOWS (Warmer Shadow) */
+      --shadow-1: 0 10px 30px rgba(62, 39, 35, 0.15);
     }
 
     /*-----------------------------------*\
@@ -77,6 +79,7 @@
       text-align: center;
       position: sticky;
       top: 60px;
+      color: var(--sidebar-text);  /* <--- ADD THIS LINE */
     }
     
     @media (max-width: 1000px) { .sidebar { width: 100%; position: relative; top: 0; } }
@@ -115,11 +118,14 @@
     /*-----------------------------------*\
       #MAIN CONTENT (Right Column)
     \*-----------------------------------*/
-    .main-content {
+   .main-content {
       background: var(--card-background);
-      border: 1px solid var(--border-color);
+      /* Remove the full border, replace with a "Header Bar" style */
+      border: none;
+      border-top: 8px solid var(--accent-color); /* Thick Gold Bar on top */
+      
       border-radius: 20px;
-      padding: 30px;
+      padding: 40px; /* More breathing room */
       flex-grow: 1;
       width: 100%;
       box-shadow: var(--shadow-1);
@@ -174,24 +180,66 @@
     p { line-height: 1.6; margin-bottom: 20px; color: var(--text-light); }
 
     /*-----------------------------------*\
-      #PORTFOLIO GRID
+      #PORTFOLIO LIST (Vertical Cards with Images)
     \*-----------------------------------*/
     .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      display: flex;
+      flex-direction: column; /* Stack them vertically */
       gap: 25px;
     }
 
     .project-card {
+      display: flex; /* Side-by-side layout */
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: stretch; /* Forces image to match card height */
+      
       background: var(--background-color);
-      padding: 20px;
+      border: 1px solid var(--border-color);
       border-radius: 15px;
       transition: 0.3s;
-      border: 1px solid var(--border-color);
+      
+      padding: 0; /* Remove padding so image touches the edge */
+      height: 160px; /* Fixed height for uniform look */
+      overflow: hidden; /* Ensures image respects rounded corners */
+      text-decoration: none; /* Removes underline from links */
     }
 
-    .project-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
-    .project-card h3 { color: var(--text-highlight); margin-bottom: 10px; }
+    .project-card:hover { 
+      transform: translateY(-5px); 
+      border-color: var(--accent-color);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Left Side (Text) */
+    .card-text {
+      padding: 30px;
+      flex: 1; /* Takes all remaining space */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-card h3 { 
+      color: var(--text-highlight); 
+      margin-bottom: 8px; 
+      font-size: 22px;
+    }
+    /* Note: .project-card p style is handled by generic p tag */
+
+    /* Right Side (Image) */
+    .card-img {
+      width: 250px; /* Fixed width for the image */
+      height: 100%;
+      object-fit: cover; /* Smart crop */
+      border-left: 1px solid var(--border-color);
+    }
+
+    /* Mobile Responsive: Stack them if screen is small */
+    @media (max-width: 768px) {
+      .project-card { flex-direction: column; height: auto; }
+      .card-img { width: 100%; height: 150px; border-left: none; border-bottom: 1px solid var(--border-color); }
+    }
     
     /*-----------------------------------*\
       #RESUME TIMELINE
@@ -211,6 +259,36 @@
     .timeline-item h4 { font-size: 18px; color: var(--text-main); }
     .timeline-item span { font-size: 14px; color: var(--accent-color); font-weight: bold; }
 
+    /*-----------------------------------*\
+      #SIDEBAR PATCH (Fixing the Contrast)
+    \*-----------------------------------*/
+    
+    /* 1. Make the Name Pop (White instead of Burgundy) */
+    .sidebar .name { 
+      color: #FFFFFF !important; 
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* Adds a little lift */
+    }
+
+    /* 2. Fix the "Job Title" Pills (Glass Effect) */
+    .sidebar .title {
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+      color: #E0E0E0; /* Light Grey text */
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* 3. Fix the Links (Email/Github) to be White */
+    .sidebar a {
+      color: #E0E0E0;
+      transition: 0.3s;
+    }
+    .sidebar a:hover { color: var(--accent-color); }
+
+    /* 4. Fix the Icons (Remove the "Sticker" box) */
+    .sidebar .icon-box {
+      background: transparent; /* No background color */
+      color: var(--accent-color); /* Gold Icon */
+      border: 1px solid var(--accent-color); /* Thin Gold Border */
+    }
   </style>
 </head>
 
@@ -303,19 +381,19 @@
             <p>B.S. Mechanical Engineering. Its a tough ride but its fun.</p>
           </li>
           <li class="timeline-item">
-            <h4>Engineering Intern</h4>
+            <h4>Mechanical Engineering Intern</h4>
             <span>Summer 2025</span>
             <p>
-            ADI
+            At Analog Devices, I was able to be on a team that got exposeure to various manufacturing steps in wafer fabricaton. In all, I had was able to work with industry vaccum toolsets, worked with and troubleshot lithography tooling, built and tested small scale robotics using computer vision and kernel manipuation, built and tested Variable Freq Drives on Semiens products, built and tested with a Universla Robots UR companion model. 
             </p>
           </li>
           <li class="timeline-item">
-            <h4>Engineering Intern</h4>
+            <h4>Mech / Manufacturing Engineering Intern</h4>
             <span>Summer + Fall 2024</span>
             <p>Oregon Tool.</p>
           </li>
           <li class="timeline-item">
-            <h4>Engineering Intern</h4>
+            <h4>Mech / Manufacturing Engineering Intern</h4>
             <span>Summer + Fall 2023</span>
             <p>Boeing.</p>
           </li>
@@ -330,39 +408,76 @@
         <p>My upcoming lecture series on Compressible Flow and Dynamics.</p>
 
         <div class="project-grid">
-          <div class="project-card">
-            <h3>Propulsion Controls</h3>
-            <p>Understanding PID loops in Jet Engines.</p>
-          </div>
+          
           <a href="compressible-flow.html" class="project-card">
-            <h3>Compressible Flow</h3>
-            <p>Mach Numbers and Shock Waves (Zucker & Biblarz).</p>
+            <div class="card-text">
+              <h3>Compressible Flow</h3>
+              <p>Mach Numbers and Shock Waves (Zucker & Biblarz).</p>
+            </div>
+            <img src="Images/Tiles/SR71mach.png" alt="SR-71 Blackbird" class="card-img">
           </a>
+
           <div class="project-card">
-            <h3>Kinematics</h3>
-            <p>Motion in a straight line.</p>
+            <div class="card-text">
+              <h3>Kinematics</h3>
+              <p>Motion in a straight line.</p>
+            </div>
+            <img src="Images/Tiles/kinematicsgang.png" alt="Kinematics" class="card-img">
           </div>
+
           <div class="project-card">
-            <h3>Rotational Motion</h3>
-            <p>Physics when things spin.</p>
+            <div class="card-text">
+              <h3>Rotational Motion</h3>
+              <p>Physics when things spin.</p>
+            </div>
+            <img src="Images/Tiles/waves.png" alt="Rotational Motion" class="card-img">
           </div>
+
         </div>
       </article>
 
 
-      <article id="contact">
+       <article id="contact">
         <header>
           <h2>Contact</h2>
         </header>
         <p>I am currently open to opportunities in Defense & Propulsion.</p>
-        <p>I am open to US, Austrailia, Ireland and Europe assignments. </p>
+        <p>I am open to assignments in the US, Australia, Ireland, and Europe.</p>
         
-        <div class="project-card">
-          <p><strong>Email:</strong> montalvj@oregonstate.edu</p>
-          <p><strong>LinkedIn:</strong> linkedin.com/in/josemontalvo</p>
-          <p><strong>Location:</strong> Oregon, USA</p>
+        <div class="contact-grid" style="margin-top: 30px; display: grid; gap: 20px;">
+          
+          <a href="mailto:montalvj@oregonstate.edu" class="contact-card">
+            <div class="contact-icon">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <h3>Email</h3>
+              <p>montalvj@oregonstate.edu</p>
+            </div>
+          </a>
+
+          <a href="https://linkedin.com/in/josemontalvo" target="_blank" class="contact-card">
+            <div class="contact-icon">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <h3>LinkedIn</h3>
+              <p>linkedin.com/in/josemontalvo</p>
+            </div>
+          </a>
+
+          <div class="contact-card">
+            <div class="contact-icon">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <h3>Location</h3>
+              <p>Oregon, USA</p>
+            </div>
+          </div>
+
         </div>
-      </article>
+      </article> 
 
     </div>
 
