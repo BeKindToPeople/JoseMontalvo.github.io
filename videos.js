@@ -2,7 +2,7 @@ const lectureData = [
   {
     title: "Lecture 0 - Test Video",
     description: "Testing the layout with a YouTube Short.",
-    youtubeId: "hzFzAS8Dj6I", // Your Shorts ID
+    youtubeId: "21X5lGlDOfg", // Your Shorts ID
     pdfLink: "OverLeafPDFs/OhRight.pdf", // Local PDF in OverLeafPDFs folder
     pdfThumb: "OverLeafPDFs/OhRight.pdf" // Using the actual PDF as a thumbnail source placeholder
   },
