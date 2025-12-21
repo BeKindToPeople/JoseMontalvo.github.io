@@ -8,6 +8,7 @@
   
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 
   <style>
     /*-----------------------------------*\
@@ -44,7 +45,6 @@
       max-width: 900px;
       margin: 0 auto;
       background: var(--card-background);
-      /* Thick Gold Top Bar */
       border-top: 8px solid var(--accent-color);
       border-radius: 20px;
       padding: 50px;
@@ -76,8 +76,8 @@
 
     /* GITHUB LINK BOX */
     .github-box {
-      background: #F0EBE0; /* Slightly darker sand for contrast */
-      border-left: 5px solid var(--sidebar-background, #143632); /* Dark Green Accent */
+      background: #F0EBE0; 
+      border-left: 5px solid var(--sidebar-background, #143632); 
       padding: 20px;
       margin-bottom: 40px;
       border-radius: 0 10px 10px 0;
@@ -90,46 +90,103 @@
     .github-text { font-weight: bold; color: var(--text-main); font-size: 18px; }
     .github-icon { font-size: 28px; color: var(--text-main); }
 
-    /* VIDEO GRID */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+    /* LECTURE DASHBOARD LAYOUT */
+    .lecture-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
     }
 
-    .video-card {
-      background: white; /* Clean white cards on the cream background */
-      padding: 25px;
-      border-radius: 15px;
+    .lecture-section {
+      background: white;
       border: 1px solid var(--border-color);
-      transition: 0.3s;
-      cursor: pointer;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .lecture-header {
+      background: var(--background-color);
+      padding: 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .lecture-icon { font-size: 24px; color: var(--accent-color); }
+    .lecture-header h3 { margin: 0; color: var(--text-highlight); font-size: 20px; }
+    .lecture-header p { margin: 5px 0 0 0; color: var(--text-light); font-size: 14px; }
+
+    .lecture-body {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .video-wrapper {
       position: relative;
+      background: black;
+      aspect-ratio: 16 / 9;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
     }
 
-    /* Little Gold Accent on card hover */
-    .video-card::before {
-      content: "";
+    .video-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+    
+    .video-wrapper:hover img { opacity: 0.6; }
+
+    .play-btn-overlay {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: var(--accent-color);
-      opacity: 0;
+      font-size: 60px;
+      color: white;
+      text-shadow: 0 0 20px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+
+    .notes-wrapper {
+      background: var(--card-background);
+      border-left: 1px solid var(--border-color);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    /* IMPORTANT: The PDF Canvas Style */
+    .pdf-thumb {
+      width: 80px;
+      height: 100px;
+      background: white;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+      object-fit: contain; /* Ensures the PDF page fits nicely */
       transition: 0.3s;
     }
 
-    .video-card:hover { 
-      transform: translateY(-5px); 
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    }
-    .video-card:hover::before { opacity: 1; }
-    
-    .video-card h3 { color: var(--text-main); margin-bottom: 10px; }
-    .video-card p { color: var(--text-light); font-size: 14px; line-height: 1.5; }
-    .play-icon { font-size: 36px; color: var(--accent-color); margin-bottom: 15px; }
+    .notes-wrapper:hover .pdf-thumb { transform: translateY(-5px); border-color: var(--accent-color); }
+    .notes-label { font-weight: bold; color: var(--text-main); font-size: 14px; }
+    .notes-sub { font-size: 12px; color: var(--text-light); }
 
-  </style>
+    /* Mobile: Stack them */
+    @media (max-width: 800px) {
+      .lecture-body { grid-template-columns: 1fr; }
+      .notes-wrapper { border-left: none; border-top: 1px solid var(--border-color); flex-direction: row; justify-content: start; gap: 20px; text-align: left; }
+      .pdf-thumb { width: 50px; height: 60px; margin-bottom: 0; }
+    }
+  </style> 
 </head>
 
 <body>
@@ -155,27 +212,90 @@
       </div>
     </a>
 
-    <div class="video-grid">
+    <div id="lecture-feed" class="lecture-feed"></div>
 
-      <a href="#" class="video-card">
-        <ion-icon name="play-circle-outline" class="play-icon"></ion-icon>
-        <h3>Start Here!</h3>
-        <p>Introduction to the series and what to expect.</p>
-      </a>
 
-      <a href="#" class="video-card">
-        <ion-icon name="videocam-outline" class="play-icon"></ion-icon>
-        <h3>Lecture 0 - Oh Right</h3>
-        <p>Setting the stage and prerequisite knowledge.</p>
-      </a>
+    <script src="videos.js"></script>
 
-      <a href="#" class="video-card">
-        <ion-icon name="flame-outline" class="play-icon"></ion-icon>
-        <h3>Lecture 1 - Thermo Review</h3>
-        <p>A quick refresher on Thermodynamics principles.</p>
-      </a>
+    <script>
+      // 1. Setup the PDF Library Worker
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
-    </div>
+      const feedContainer = document.getElementById('lecture-feed');
+      let allCardsHTML = "";
+
+      // 2. Build the HTML String first (Prevents glitches)
+      lectureData.forEach((lecture, index) => {
+        const canvasId = `pdf-render-${index}`;
+        
+        allCardsHTML += `
+          <div class="lecture-section">
+            <div class="lecture-header">
+              <ion-icon name="caret-forward-circle-outline" class="lecture-icon"></ion-icon>
+              <div>
+                <h3>${lecture.title}</h3>
+                <p>${lecture.description}</p>
+              </div>
+            </div>
+
+            <div class="lecture-body">
+              <div class="video-wrapper" onclick="loadVideo(this, '${lecture.youtubeId}')">
+                <img src="https://img.youtube.com/vi/${lecture.youtubeId}/maxresdefault.jpg" alt="Video Thumbnail">
+                <ion-icon name="play-circle" class="play-btn-overlay"></ion-icon>
+              </div>
+
+              <a href="${lecture.pdfLink}" target="_blank" class="notes-wrapper">
+                <canvas id="${canvasId}" class="pdf-thumb"></canvas>
+                <div>
+                  <div class="notes-label">Lecture Notes</div>
+                  <div class="notes-sub">Download PDF</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        `;
+      });
+
+      // 3. Inject HTML into the page
+      feedContainer.innerHTML = allCardsHTML;
+
+      // 4. Trigger PDF Rendering for each card
+      lectureData.forEach((lecture, index) => {
+        const canvasId = `pdf-render-${index}`;
+        renderPDFThumbnail(lecture.pdfLink, canvasId);
+      });
+
+      // --- PDF RENDERER ENGINE ---
+      function renderPDFThumbnail(url, canvasId) {
+        const loadingTask = pdfjsLib.getDocument(url);
+        loadingTask.promise.then(function(pdf) {
+          pdf.getPage(1).then(function(page) {
+            const scale = 0.5; 
+            const viewport = page.getViewport({scale: scale});
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            page.render(renderContext);
+          });
+        }).catch(function (reason) {
+          console.error("Error loading PDF for " + canvasId, reason);
+        });
+      }
+
+      // --- VIDEO LOADER ---
+      function loadVideo(wrapper, videoId) {
+        wrapper.innerHTML = `
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
+      }
+    </script>
 
   </div>
 
