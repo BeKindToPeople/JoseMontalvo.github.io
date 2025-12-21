@@ -166,8 +166,8 @@
 
     /* IMPORTANT: The PDF Canvas Style */
     .pdf-thumb {
-      width: 80px;
-      height: 100px;
+      width: 120px;
+      height: 150px;
       background: white;
       border: 1px solid var(--border-color);
       box-shadow: 0 5px 10px rgba(0,0,0,0.1);
@@ -184,7 +184,7 @@
     @media (max-width: 800px) {
       .lecture-body { grid-template-columns: 1fr; }
       .notes-wrapper { border-left: none; border-top: 1px solid var(--border-color); flex-direction: row; justify-content: start; gap: 20px; text-align: left; }
-      .pdf-thumb { width: 50px; height: 60px; margin-bottom: 0; }
+      .pdf-thumb { width: 70px; height: 90px; margin-bottom: 0; }
     }
   </style> 
 </head>
@@ -240,7 +240,7 @@
 
             <div class="lecture-body">
               <div class="video-wrapper" onclick="loadVideo(this, '${lecture.youtubeId}')">
-                <img src="https://img.youtube.com/vi/${lecture.youtubeId}/maxresdefault.jpg" alt="Video Thumbnail">
+                <img src="https://img.youtube.com/vi/${lecture.youtubeId}/hqdefault.jpg" alt="Video Thumbnail">
                 <ion-icon name="play-circle" class="play-btn-overlay"></ion-icon>
               </div>
 
@@ -289,11 +289,39 @@
         });
       }
 
-      // --- VIDEO LOADER ---
+      // --- VIDEO LOADER (uses YouTube IFrame API to detect errors) ---
+      // Promise that resolves when the YT API is ready
+      const ytApiReady = new Promise((resolve) => {
+        if (window.YT && window.YT.Player) return resolve();
+        window.onYouTubeIframeAPIReady = function() { resolve(); };
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(tag);
+      });
+
       function loadVideo(wrapper, videoId) {
-        wrapper.innerHTML = `
-          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        `;
+        const playerId = `yt-player-${videoId}-${Date.now()}`;
+        wrapper.innerHTML = `<div id="${playerId}" style="width:100%;height:100%;"></div>`;
+
+        ytApiReady.then(() => {
+          if (!window._ytPlayers) window._ytPlayers = {};
+          // create a new YT player instance; onError opens YouTube in a new tab
+          window._ytPlayers[playerId] = new YT.Player(playerId, {
+            videoId: videoId,
+            width: '100%',
+            height: '100%',
+            playerVars: { rel: 0, modestbranding: 1, autoplay: 1 },
+            events: {
+              onReady: function(e) { try { e.target.playVideo(); } catch (err) { /* ignore */ } },
+              onError: function(e) {
+                window.open('https://www.youtube.com/watch?v=' + videoId, '_blank');
+              }
+            }
+          });
+        }).catch(() => {
+          // If API fails to load, fallback to opening on YouTube
+          window.open('https://www.youtube.com/watch?v=' + videoId, '_blank');
+        });
       }
     </script>
 
