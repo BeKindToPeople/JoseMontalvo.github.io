@@ -338,9 +338,9 @@
 
       <nav class="navbar">
         <ul class="navbar-list">
-          <li><button class="navbar-link active" onclick="openTab('about')">About</button></li>
-          <li><button class="navbar-link" onclick="openTab('resume')">Resume</button></li>
+          <li><button class="navbar-link active" onclick="openTab('about')">About Me</button></li>
           <li><button class="navbar-link" onclick="openTab('portfolio')">Portfolio</button></li>
+          <li><button class="navbar-link" onclick="openTab('workTimeline')">Work Timeline</button></li>
           <li><button class="navbar-link" onclick="openTab('contact')">Contact</button></li>
         </ul>
       </nav>
@@ -368,44 +368,11 @@
         </div>
       </article>
 
-
-      <article id="resume">
-        <header>
-          <h2>Resume</h2>
-        </header>
-        
-        <ol class="timeline-list">
-          <li class="timeline-item">
-            <h4>Oregon State University</h4>
-            <span>2021 — Present</span>
-            <p>B.S. Mechanical Engineering. Its a tough ride but its fun.</p>
-          </li>
-          <li class="timeline-item">
-            <h4>Mechanical Engineering Intern</h4>
-            <span>Summer 2025</span>
-            <p>
-            At Analog Devices, I was able to be on a team that got exposeure to various manufacturing steps in wafer fabricaton. In all, I had was able to work with industry vaccum toolsets, worked with and troubleshot lithography tooling, built and tested small scale robotics using computer vision and kernel manipuation, built and tested Variable Freq Drives on Semiens products, built and tested with a Universla Robots UR companion model. 
-            </p>
-          </li>
-          <li class="timeline-item">
-            <h4>Mech / Manufacturing Engineering Intern</h4>
-            <span>Summer + Fall 2024</span>
-            <p>Oregon Tool.</p>
-          </li>
-          <li class="timeline-item">
-            <h4>Mech / Manufacturing Engineering Intern</h4>
-            <span>Summer + Fall 2023</span>
-            <p>Boeing.</p>
-          </li>
-        </ol>
-      </article>
-
-
-      <article id="portfolio">
+         <article id="portfolio">
         <header>
           <h2>Video Lectures</h2>
         </header>
-        <p>My upcoming lecture series on Compressible Flow and Dynamics.</p>
+        <p>My upcoming lecture series on topics that I fell in love with.</p>
 
         <div class="project-grid">
           
@@ -435,6 +402,85 @@
 
         </div>
       </article>
+
+      <article id="workTimeline">
+        <header>
+          <h2>Work Timeline</h2>
+        </header>
+        
+        <ol class="timeline-list">
+          <li class="timeline-item">
+            <h4>Oregon State University</h4>
+            <span>2021 — Present</span>
+            <p>B.S. Mechanical Engineering. Its a tough ride but its fun.</p>
+          </li>
+          <li class="timeline-item">
+            <h4>Mechanical Engineering Intern</h4>
+            <h5>Analog Devices - Hilsboro, Or</h5>
+            <span>Summer 2025</span>
+            <p>
+            At Analog Devices, I was able to be on a team that got exposeure to various manufacturing 
+            steps in wafer fabricaton. In all, I had was able to work with industry vaccum toolsets, 
+            worked with and troubleshot lithography tooling, built and tested small scale robotics using 
+            computer vision and kernel manipuation, built and tested Variable Freq Drives on Semiens products, 
+            built and tested with a Universal Robots UR companion model. 
+            </p>
+            <p>
+              During this time I was also able to work with operators that were going through a course to become operator maintainers. 
+              The knowledge that they had about how very speficific equiptment worked was one thing, how they were able
+              articulate their thought prcess for esceltion/ judgment calls was another. They know how to balance the very
+              very expensive downtime and in demand need of engineering support time. Thats not something you get from a class
+              , its felt from experience.
+            </thead> 
+            </p>
+          </li>
+          <li class="timeline-item">
+            <h4>Mech / Manufacturing Engineering Intern</h4>
+            <h5>Oregon Tool - Portland, Or</h5>
+            <span>Summer + Fall 2024</span>
+            <p>At Oregon Tool I was able to use my CAD experiance to help the manufacturing team with 2 
+              safety designs and my background in root cause to help with a Mixed Parts issue.</p>
+            <p>
+             The first saftey design was for a pinch point that existed in a blind spot for the operators on an articulating 
+             grinding machine. 
+             The first version was one that would be great for 3D  but absolute horror for sending off to Manufacturing.
+             The second and final  was elegant, cheap, easy to manufacture and was able to fit a range
+            of motion that would show up as a new requrement with the deviation from 3D printing. The 2nd 
+            saftey design was for a maintenence cart redesign. The carts were used for loading and onloading 
+            die presses that would range from 200 to 600 lbs. The redesign would allow for a larger degree of control 
+            over the lunricant that would come off the dies when transporting them around the shop floor. 
+            </p>
+            <p>
+             Mixed parts jammed machines and cost time in the production line, it cost time with maintenence,
+             it reduced overall delivery time and caused many tonnes of wasted material since sorting was so expensive.
+             Going through a Root Cause analysis I was able to narrow down to a few of likely points where mixing would happen.
+             Of those points One would be mechanical in nature and the otheres would be procedural.
+             The mechanical issue would be in an auguer feeder for a heat treatment processes and it
+             financialy prohibited to spend resouces for a high temp camera system to inspect the flow.
+             The other two points would be addressed with a container redesign and a procedural change AKA more training.
+             As unclimactic as it sounds, the procedural change was the most effective, not by way of reduced parts,
+              which happened, but with how the entire inspection and implemantation took place. People want to be head and 
+              with a cronic issue like mixed parts, its easy to get jaded. By involving the operators and maintenence team
+              in the solution we were able to get buy in and make the change stick.
+            </p>
+          </li>
+          <li class="timeline-item">
+            <h4>Mech / Manufacturing Engineering Intern</h4>
+            <h5>Boeing - 747 - Renton, Wa</h5>
+            <span>Summer + Fall 2023</span>
+            <p>
+              At Boeing I was able to work on the 747 program as a manufacturing engineering intern. 
+              My main project was to help with the implementation of a new torque tool for the horizontal stabilizer 
+              installation process. This involved working with quality engineers to ensure that the new tool met all 
+              necessary specifications and standards. I also collaborated with manufacturing teams to develop 
+              training materials and procedures for using the new tool effectively.
+            </p>
+          </li>
+        </ol>
+      </article>
+
+
+   
 
 
        <article id="contact">
