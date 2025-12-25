@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Numerical Methods Series | Jose Montalvo</title>
+  
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+  <style>
+    /*-----------------------------------*\
+      #WARM DESERT ACADEMY THEME
+    \*-----------------------------------*/
+    :root {
+      /* BACKGROUNDS */
+      --background-color: #E6DECF;      /* Warm Sandstone */
+      --card-background: #FFFAF0;       /* Floral Cream */
+      
+      /* TEXT COLORS */
+      --text-main: #2C241B;             /* Dark Espresso */
+      --text-light: #5D4037;            /* Leather Brown */
+      --text-highlight: #8B2E39;        /* Deep Burgundy */
+
+      /* ACCENTS */
+      --accent-color: #D99E53;          /* Bright Sunset Gold */
+      --border-color: #D4C5B0;          /* Sand Border */
+      
+      --shadow-1: 0 10px 30px rgba(62, 39, 35, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--background-color);
+      color: var(--text-main);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 40px 20px;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* LAYOUT SPECIFIC TO THIS PAGE */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-background);
+      border-top: 8px solid var(--accent-color);
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: var(--shadow-1);
+    }
+
+    /* HEADER AREA */
+    .page-header {
+      margin-bottom: 40px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 20px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--text-light);
+      font-weight: bold;
+      margin-bottom: 25px;
+      transition: 0.3s;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .back-btn:hover { color: var(--accent-color); transform: translateX(-5px); }
+
+    h1 { color: var(--text-highlight); font-size: 36px; margin-bottom: 10px; }
+
+    /* GITHUB LINK BOX */
+    .github-box {
+      background: #F0EBE0; 
+      border-left: 5px solid var(--sidebar-background, #143632); 
+      padding: 20px;
+      margin-bottom: 40px;
+      border-radius: 0 10px 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: 0.3s;
+    }
+    .github-box:hover { background: #E6DECF; transform: translateX(5px); }
+    .github-text { font-weight: bold; color: var(--text-main); font-size: 18px; }
+    .github-icon { font-size: 28px; color: var(--text-main); }
+
+    /* LECTURE DASHBOARD LAYOUT */
+    .lecture-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .lecture-section {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .lecture-header {
+      background: var(--background-color);
+      padding: 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .lecture-icon { font-size: 24px; color: var(--accent-color); }
+    .lecture-header h3 { margin: 0; color: var(--text-highlight); font-size: 20px; }
+    .lecture-header p { margin: 5px 0 0 0; color: var(--text-light); font-size: 14px; }
+
+    .lecture-body {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+    }
+
+    .video-wrapper {
+      position: relative;
+      background: black;
+      aspect-ratio: 16 / 9;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .video-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+    
+    .video-wrapper:hover img { opacity: 0.6; }
+
+    .play-btn-overlay {
+      position: absolute;
+      font-size: 60px;
+      color: white;
+      text-shadow: 0 0 20px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+
+    .notes-wrapper {
+      background: var(--card-background);
+      border-left: 1px solid var(--border-color);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    /* IMPORTANT: The PDF Canvas Style */
+    .pdf-thumb {
+      width: 120px;
+      height: 150px;
+      background: white;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+      object-fit: contain; /* Ensures the PDF page fits nicely */
+      transition: 0.3s;
+    }
+
+    .notes-wrapper:hover .pdf-thumb { transform: translateY(-5px); border-color: var(--accent-color); }
+    .notes-label { font-weight: bold; color: var(--text-main); font-size: 14px; }
+    .notes-sub { font-size: 12px; color: var(--text-light); }
+
+    /* Mobile: Stack them */
+    @media (max-width: 800px) {
+      .lecture-body { grid-template-columns: 1fr; }
+      .notes-wrapper { border-left: none; border-top: 1px solid var(--border-color); flex-direction: row; justify-content: start; gap: 20px; text-align: left; }
+      .pdf-thumb { width: 70px; height: 90px; margin-bottom: 0; }
+    }
+  </style> 
+</head>
+
+<body>
+
+  <div class="container">
+    
+    <a href="index.html" class="back-btn">
+      <ion-icon name="arrow-back-outline"></ion-icon> Back to Portfolio
+    </a>
+
+    <header class="page-header">
+      <h1>ReEntry Method</h1>
+      <p>How to get down from really high up without protein denaturaization.</p>
+    </header>
+
+    <a href="https://github.com/BeKindToPeople/NumericalMethodsMono" target="_blank">
+      <div class="github-box">
+        <div>
+          <div class="github-text">Learning Material: BeKindToPeople/NumericalMethodsMono</div>
+          <span style="font-size: 14px; color: var(--text-light);">still working</span>
+        </div>
+        <ion-icon name="logo-github" class="github-icon"></ion-icon>
+      </div>
+    </a>
+
+    <div id="lecture-feed" class="lecture-feed"></div>
+
+
+    <script src="videosNumericalMethods.js"></script>
+
+    <script>
+      // 1. Setup the PDF Library Worker
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+      const feedContainer = document.getElementById('lecture-feed');
+      let allCardsHTML = "";
+
+      // 2. Build the HTML String first (Prevents glitches)
+      lectureData.forEach((lecture, index) => {
+        const canvasId = `pdf-render-${index}`;
+        
+        allCardsHTML += `
+          <div class="lecture-section">
+            <div class="lecture-header">
+              <ion-icon name="caret-forward-circle-outline" class="lecture-icon"></ion-icon>
+              <div>
+                <h3>${lecture.title}</h3>
+                <p>${lecture.description}</p>
+              </div>
+            </div>
+
+            <div class="lecture-body">
+              <div class="video-wrapper" onclick="loadVideo(this, '${lecture.youtubeId}')">
+                <img src="https://img.youtube.com/vi/${lecture.youtubeId}/hqdefault.jpg" alt="Video Thumbnail">
+                <ion-icon name="play-circle" class="play-btn-overlay"></ion-icon>
+              </div>
+
+              <a href="${lecture.pdfLink}" target="_blank" class="notes-wrapper">
+                <canvas id="${canvasId}" class="pdf-thumb"></canvas>
+                <div>
+                  <div class="notes-label">Lecture Notes</div>
+                  <div class="notes-sub">Download PDF</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        `;
+      });
+
+      // 3. Inject HTML into the page
+      feedContainer.innerHTML = allCardsHTML;
+
+      // 4. Trigger PDF Rendering for each card
+      lectureData.forEach((lecture, index) => {
+        const canvasId = `pdf-render-${index}`;
+        renderPDFThumbnail(lecture.pdfLink, canvasId);
+      });
+
+      // --- PDF RENDERER ENGINE ---
+      function renderPDFThumbnail(url, canvasId) {
+        const loadingTask = pdfjsLib.getDocument(url);
+        loadingTask.promise.then(function(pdf) {
+          pdf.getPage(1).then(function(page) {
+            const scale = 0.5; 
+            const viewport = page.getViewport({scale: scale});
+            const canvas = document.getElementById(canvasId);
+            const context = canvas.getContext('2d');
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            page.render(renderContext);
+          });
+        }).catch(function (reason) {
+          console.error("Error loading PDF for " + canvasId, reason);
+        });
+      }
+
+      // --- VIDEO LOADER (uses YouTube IFrame API to detect errors) ---
+      // Promise that resolves when the YT API is ready
+      const ytApiReady = new Promise((resolve) => {
+        if (window.YT && window.YT.Player) return resolve();
+        window.onYouTubeIframeAPIReady = function() { resolve(); };
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(tag);
+      });
+
+      function loadVideo(wrapper, videoId) {
+        const playerId = `yt-player-${videoId}-${Date.now()}`;
+        wrapper.innerHTML = `<div id="${playerId}" style="width:100%;height:100%;"></div>`;
+
+        ytApiReady.then(() => {
+          if (!window._ytPlayers) window._ytPlayers = {};
+          // create a new YT player instance; onError opens YouTube in a new tab
+          window._ytPlayers[playerId] = new YT.Player(playerId, {
+            videoId: videoId,
+            width: '100%',
+            height: '100%',
+            playerVars: { rel: 0, modestbranding: 1, autoplay: 1 },
+            events: {
+              onReady: function(e) { try { e.target.playVideo(); } catch (err) { /* ignore */ } },
+              onError: function(e) {
+                window.open('https://www.youtube.com/watch?v=' + videoId, '_blank');
+              }
+            }
+          });
+        }).catch(() => {
+          // If API fails to load, fallback to opening on YouTube
+          window.open('https://www.youtube.com/watch?v=' + videoId, '_blank');
+        });
+      }
+    </script>
+
+  </div>
+
+</body>
+</html>
