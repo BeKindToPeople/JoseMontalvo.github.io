@@ -3,8 +3,8 @@ const lectureData = [
     title: "Lecture 0 - Test Video",
     description: "Testing the layout with a YouTube Short.",
     youtubeId: "21X5lGlDOfg", // Your Shorts ID
-    pdfLink: "OverLeafPDFs/Rotational/ReEntryMono.pdf", // Local PDF in OverLeafPDFs folder
-    pdfThumb: "OverLeafPDFs/Rotational/ReEntryMono.pdf" // Using the actual PDF as a thumbnail source placeholder
+    pdfLink: "OverLeafPDFs/Rotational/ReEntryMono.pdf", 
+    pdfThumb: "OverLeafPDFs/Rotational/ReEntryMono.pdf" 
   },
-  // You can copy-paste this block to add Lecture 1, 2, etc.
+  //copy-paste 
 ];
