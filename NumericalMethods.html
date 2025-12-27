@@ -282,7 +282,7 @@
         const loadingTask = pdfjsLib.getDocument(url);
         loadingTask.promise.then(function(pdf) {
           pdf.getPage(1).then(function(page) {
-            const scale = 0.5; 
+           const scale = 1.0;  
             const viewport = page.getViewport({scale: scale});
             const canvas = document.getElementById(canvasId);
             const context = canvas.getContext('2d');
