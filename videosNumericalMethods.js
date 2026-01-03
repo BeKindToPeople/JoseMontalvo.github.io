@@ -2,9 +2,21 @@ const lectureData = [
   {
     title: "Lecture 0 - Test Video",
     description: "Testing the layout with a YouTube Short.",
-    youtubeId: "21X5lGlDOfg", // Your Shorts ID
-    pdfLink: "OverLeafPDFs/NumericalMethods/NumericalMethodsMono.pdf", 
-    pdfThumb: "OverLeafPDFs/NumericalMethods/NumericalMethodsMono.pdf" 
+    youtubeId: "21X5lGlDOfg", 
+    pdfLink: "OverLeafPDFs/NumericalMethods/00/NumericalMethodsMono00.pdf", 
   },
-  // You can copy-paste this block to add Lecture 1, 2, etc.
+
+  {
+    title: "Lecture 1 - Test Video",
+    description: "Testing the layout with a YouTube Short.",
+    youtubeId: "21X5lGlDOfg", 
+    pdfLink: "OverLeafPDFs/NumericalMethods/01/NumericalMethodsMono01.pdf", 
+  },
+
+  {
+    title: "Lecture 2 - Test Video", 
+    description: "Testing the layout with a YouTube Short.",
+    youtubeId: "21X5lGlDOfg", 
+    pdfLink: "OverLeafPDFs/NumericalMethods/02/NumericalMethodsMono02.pdf", 
+  },
 ];
