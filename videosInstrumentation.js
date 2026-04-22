@@ -29,7 +29,7 @@ const lectureData = [
     description: "Testing the layout with a YouTube Short.",
     youtubeId: "21X5lGlDOfg", // Your Shorts ID
     pdfLink: "OverLeafPDFs/Instrumentation/Lab4.pdf", 
-    pdfThumb: "OverLeafPDFs/Instrumentation/Lab4 .pdf" 
+    pdfThumb: "OverLeafPDFs/Instrumentation/Lab4.pdf" 
   },
 
   {
@@ -81,6 +81,6 @@ const lectureData = [
     pdfThumb: "OverLeafPDFs/Instrumentation/Lab8.pdf" 
   },
 
-  
+
   // You can copy-paste
 ];
